@@ -1,0 +1,1 @@
+/usr/bin/c++   -g   CMakeFiles/Testing-Project.dir/main.cpp.o CMakeFiles/Testing-Project.dir/tests/gtest.cpp.o CMakeFiles/Testing-Project.dir/tests/gtest_fixture.cpp.o  -o Testing-Project lib/libgtestd.a lib/libgtest_maind.a lib/libgtestd.a -lpthread 

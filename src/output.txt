@@ -1,0 +1,8 @@
+1 normal 0 6
+3 vip 2 9
+2 normal 6 12
+totalNormalWait = 6 ,totalVipWait = 2
+1 normal 0 6
+2 vip 3 9
+3 normal 5 12
+totalNormalWait = 5 ,totalVipWait = 3

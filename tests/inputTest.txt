@@ -1,0 +1,9 @@
+#id expectedWaitTime expectedLeaveTime expextedType
+1 0 6 normal
+2 6 12 normal
+3 2 9 vip
+X
+1 0 6 normal
+2 3 9 vip
+3 5 12 normal
+X
