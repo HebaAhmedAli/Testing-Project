@@ -45,10 +45,15 @@ TEST(SimulatorTest, correctType) {
         {
             ASSERT_EQ(visitorsAllCasesTests[i][j].expextedType, visitorsAllCases[i][j].calculatedType)<<visitorsAllCasesTests[i][j].id
                                <<visitorsAllCases[i][j].id;
-            // TODO: Test the WaitTime.
 
-            // TODO: Test the LeaveTime.
+			ASSERT_EQ(visitorsAllCasesTests[i][j].expectedWaitTime, visitorsAllCases[i][j].calculatedWaitTime) << "wait time mismatches Tno. "
+				<< i << "user " << j << " " << visitorsAllCasesTests[i][j].expectedWaitTime << " " << visitorsAllCases[i][j].calculatedWaitTime << endl;
 
+			ASSERT_EQ(visitorsAllCasesTests[i][j].calculatedLeaveTime, visitorsAllCases[i][j].calculatedLeaveTime) << "leave time mismatches Tno. "
+				<< i << "user " << j << " " << visitorsAllCasesTests[i][j].calculatedLeaveTime << " " << visitorsAllCases[i][j].calculatedLeaveTime << endl;
+
+
+		
 
         }
     }

@@ -20,7 +20,8 @@ namespace {
             expectedPeople.push_back(visitoTest);
             expectedPeople.push_back(visitoTest3);
             expectedPeople.push_back(visitoTest2);
-
+			int totalNormalWait = 6;
+			int totalVipWait = 2;
         }
 
         queue<Visitor> allPeople;      // This queue will contains all people.
@@ -44,10 +45,9 @@ namespace {
             ASSERT_EQ(visitors[i].calculatedType, expectedPeople[i].expextedType) << "type mismatch" << endl;
 
         }
-
-        // TODO: Test the totalNormalWait.
-
-        // TODO: Test the totalVipWait.
+		ASSERT_EQ(s.totalNormalWait, totalNormalWait) << "total Normal Wait mismatch " << s.totalNormalWait << endl;
+		
+		ASSERT_EQ(s.totalVipWait, totalVipWait) << "total VIP Wait mismatch " << s.totalVipWait << endl;
 
 
     }
