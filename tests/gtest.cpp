@@ -45,16 +45,15 @@ TEST(SimulatorTest, correctType) {
         {
             ASSERT_EQ(visitorsAllCasesTests[i][j].expextedType, visitorsAllCases[i][j].calculatedType)<<visitorsAllCasesTests[i][j].id
                                <<visitorsAllCases[i][j].id;
+            // TODO: Test the WaitTime.
+
+            // TODO: Test the LeaveTime.
+
 
         }
     }
 }
 
-// TODO: Test the WaitTime.
+// TODO: Test func enterPeopleToWait in server.
 
-// TODO: Test the LeaveTime.
-
-// TODO: Test the totalNormalWait.
-
-// TODO: Test the totalVipWait.
-
+// TODO: Test func startServe in server.

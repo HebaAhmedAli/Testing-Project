@@ -28,11 +28,6 @@ namespace {
     };
 
 
-// TODO: Test func enterPeopleToWait in server.
-
-// TODO: Test func startServe in server.
-
-
 // TODO: Test func startSimulation in simulator.
     TEST_F(SimulationTest, testStartSimulation) {
         Simulator s;
@@ -49,6 +44,12 @@ namespace {
             ASSERT_EQ(visitors[i].calculatedType, expectedPeople[i].expextedType) << "type mismatch" << endl;
 
         }
+
+        // TODO: Test the totalNormalWait.
+
+        // TODO: Test the totalVipWait.
+
+
     }
 }
 
