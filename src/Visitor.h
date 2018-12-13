@@ -10,6 +10,16 @@ using namespace std;
 class Visitor {
 
 public:
+    Visitor(){
+
+    }
+    Visitor(int id,int arrivalTime,int serviceTime,float r)
+    {
+        this->id=id;
+        this->arrivalTime=arrivalTime;
+        this->serviceTime=serviceTime;
+        this->r=r;
+    }
     int id;
     int arrivalTime;
     int serviceTime;
