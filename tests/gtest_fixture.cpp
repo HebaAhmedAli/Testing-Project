@@ -20,12 +20,14 @@ namespace {
             expectedPeople.push_back(visitoTest);
             expectedPeople.push_back(visitoTest3);
             expectedPeople.push_back(visitoTest2);
-			int totalNormalWait = 6;
-			int totalVipWait = 2;
+			totalNormalWait = 4;
+			totalVipWait = 0;
         }
 
         queue<Visitor> allPeople;      // This queue will contains all people.
         vector<VisitoTest> expectedPeople;
+        int totalNormalWait;
+        int totalVipWait;
     };
 
 

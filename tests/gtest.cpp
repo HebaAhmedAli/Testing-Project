@@ -43,14 +43,14 @@ TEST(SimulatorTest, correctType) {
 
         for(int j=0;j<visitorsAllCases[i].size();j++)
         {
-            ASSERT_EQ(visitorsAllCasesTests[i][j].expextedType, visitorsAllCases[i][j].calculatedType)<<visitorsAllCasesTests[i][j].id
-                               <<visitorsAllCases[i][j].id;
+            ASSERT_EQ(visitorsAllCasesTests[i][j].expextedType, visitorsAllCases[i][j].calculatedType)<< "Type mismatches Tno. "
+                             << i << "user id " << visitorsAllCases[i][j].id <<endl;
 
 			ASSERT_EQ(visitorsAllCasesTests[i][j].expectedWaitTime, visitorsAllCases[i][j].calculatedWaitTime) << "wait time mismatches Tno. "
-				<< i << "user " << j << " " << visitorsAllCasesTests[i][j].expectedWaitTime << " " << visitorsAllCases[i][j].calculatedWaitTime << endl;
+				<< i << "user id " << visitorsAllCases[i][j].id << " " << visitorsAllCasesTests[i][j].expectedWaitTime << " " << visitorsAllCases[i][j].calculatedWaitTime << endl;
 
-			ASSERT_EQ(visitorsAllCasesTests[i][j].calculatedLeaveTime, visitorsAllCases[i][j].calculatedLeaveTime) << "leave time mismatches Tno. "
-				<< i << "user " << j << " " << visitorsAllCasesTests[i][j].calculatedLeaveTime << " " << visitorsAllCases[i][j].calculatedLeaveTime << endl;
+			ASSERT_EQ(visitorsAllCasesTests[i][j].expectedLeaveTime, visitorsAllCases[i][j].calculatedLeaveTime) << "leave time mismatches Tno. "
+				<< i << "user id " << visitorsAllCases[i][j].id<< j << " " << visitorsAllCasesTests[i][j].expectedLeaveTime << " " << visitorsAllCases[i][j].calculatedLeaveTime << endl;
 
 
 		
