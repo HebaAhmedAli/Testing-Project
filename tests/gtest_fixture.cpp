@@ -10,7 +10,7 @@ namespace {
             Visitor visitor(1, 1, 5, 0.1);             // 0 6 normal
             VisitoTest visitoTest(1, 0, 6, "normal");
             allPeople.push(visitor);
-            Visitor visitor2(2, 5, 4, 0.1);             // 4 13 normal
+            Visitor visitor2(2, 5, 4, 0.7);             // 4 13 normal
             VisitoTest visitoTest2(2, 4, 13, "normal");
             allPeople.push(visitor2);
             Visitor visitor3 = Visitor(3, 6, 3, 0.7);   // 0 9 vip
@@ -36,6 +36,7 @@ namespace {
         Simulator s;
         s.allPeople = this->allPeople;
         vector<Visitor> visitors = s.startSimulation();
+        // TODO: Replace visitors.size() with 2 to try wrong assert
         ASSERT_EQ(visitors.size(), expectedPeople.size()) << "size mismatch" << endl;
         for (int i = 0; i < visitors.size(); i++) {
             ASSERT_EQ(visitors[i].id, expectedPeople[i].id)
@@ -51,6 +52,7 @@ namespace {
 		
 		ASSERT_EQ(s.totalVipWait, totalVipWait) << "total VIP Wait mismatch " << s.totalVipWait << endl;
 
+        cout<<"The code don't continue after found a wrong test case as using Assert.."<<endl;
 
     }
 }

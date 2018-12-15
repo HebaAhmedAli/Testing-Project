@@ -31,7 +31,7 @@ public:
 
         // For testing perpose.
         ofstream out;
-        out.open("/home/heba/Documents/cmp/fourth_year/Testing/ProjectToTest/src/output.txt", ios::out);
+        out.open("/home/heba/Documents/cmp/fourth_year/Testing/Testing-Project/src/output.txt", ios::out);
         //////////////////////.
 
         string line;
@@ -62,15 +62,15 @@ public:
     vector<Visitor> startSimulation()
     {
         float timer = allPeople.front().arrivalTime;
-        server.enterPeopleToWait(timer,allPeople);
         while (!allPeople.empty())
         {
-            server.startServe(timer,allPeople,totalNormalWait,totalVipWait);
+            server.enterPeopleToWait(timer,allPeople);
+            server.startServe(timer,totalNormalWait,totalVipWait);
         }
 
         while (!server.normalPeople.empty() || !server.vipPeople.empty())
         {
-            server.startServe(timer,allPeople,totalNormalWait,totalVipWait);
+            server.startServe(timer,totalNormalWait,totalVipWait);
         }
         return server.servedPeople;
     }

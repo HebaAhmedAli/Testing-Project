@@ -4,6 +4,6 @@
 3 2 9 vip
 X
 1 0 6 normal
-2 3 9 vip
+2 3 9 normal
 3 5 12 normal
 X

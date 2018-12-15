@@ -48,13 +48,14 @@ public:
         if (!allPeople.empty()&&normalPeople.empty() && vipPeople.empty())
         {
             Visitor v=allPeople.front();
+            v.calculatedType="normal";
             normalPeople.push(v);
             timer = v.arrivalTime;
             allPeople.pop();
         }
     }
 
-    void startServe(float& timer,queue<Visitor>& allPeople,int& totalNormalWait,int& totalVipWait)
+    void startServe(float& timer,int& totalNormalWait,int& totalVipWait)
     {
         if (!vipPeople.empty())
         {
@@ -66,7 +67,6 @@ public:
             timer += v.serviceTime;    // Add the service time to the timer.
             v.calculatedLeaveTime = timer;
             servedPeople.push_back(v);
-            enterPeopleToWait(timer,allPeople);
             vipPeople.pop();
         }
         else
@@ -80,7 +80,6 @@ public:
             timer += v.serviceTime;    // Add the service time to the timer.
             v.calculatedLeaveTime = timer;
             servedPeople.push_back(v);
-            enterPeopleToWait(timer,allPeople);
             normalPeople.pop();
         }
     }
