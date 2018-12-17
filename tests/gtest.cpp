@@ -27,6 +27,16 @@ vector<vector<VisitoTest>> readTests(string filePath)
     }
     return visitorsAllCases;
 }
+void checkAfterServing(Server server,float timer,float timerExpected,int id,int wait,int leave,string type)
+{
+    ASSERT_EQ(id,server.servedPeople[server.servedPeople.size()-1].id);
+    ASSERT_EQ(wait,server.servedPeople[server.servedPeople.size()-1].calculatedWaitTime);
+    ASSERT_EQ(leave,server.servedPeople[server.servedPeople.size()-1].calculatedLeaveTime);
+    ASSERT_EQ(type,server.servedPeople[server.servedPeople.size()-1].calculatedType)
+                                <<"id = "  <<server.servedPeople[server.servedPeople.size()-1].id;
+    ASSERT_EQ(timerExpected,timer);
+
+}
 
 static bool
 idCompare(const Visitor& a, const Visitor& b) {
@@ -101,6 +111,7 @@ TEST(TestEnterPeopleToWait,enterCorrectly)
 
 }
 
+
 // TODO: Test func startServe in server.
 TEST(TestStartServe,servedCorrectly)
 {
@@ -122,46 +133,31 @@ TEST(TestStartServe,servedCorrectly)
     server.enterPeopleToWait(timer,allPeople);
     server.startServe(timer,totalNormalWait,totalVipWait);
 
-    ASSERT_EQ(1,server.servedPeople[server.servedPeople.size()-1].id);
-    ASSERT_EQ(0,server.servedPeople[server.servedPeople.size()-1].calculatedWaitTime);
-    ASSERT_EQ(6,server.servedPeople[server.servedPeople.size()-1].calculatedLeaveTime);
-    ASSERT_EQ("normal",server.servedPeople[server.servedPeople.size()-1].calculatedType)
-                <<"id = "  <<server.servedPeople[server.servedPeople.size()-1].id;
-    ASSERT_EQ(6,timer);
+    checkAfterServing(server,timer,6,1,0,6,"normal");
+
 
     server.enterPeopleToWait(timer,allPeople);
     ASSERT_EQ(7,timer);
     server.startServe(timer,totalNormalWait,totalVipWait);
-    ASSERT_EQ(2,server.servedPeople[server.servedPeople.size()-1].id);
-    ASSERT_EQ(0,server.servedPeople[server.servedPeople.size()-1].calculatedWaitTime);
-    ASSERT_EQ(11,server.servedPeople[server.servedPeople.size()-1].calculatedLeaveTime);
-    ASSERT_EQ("normal",server.servedPeople[server.servedPeople.size()-1].calculatedType)
-                                <<"id = "  <<server.servedPeople[server.servedPeople.size()-1].id;
-    ASSERT_EQ(11,timer);
+
+    checkAfterServing(server,timer,11,2,0,11,"normal");
+
 
     server.enterPeopleToWait(timer,allPeople);
     ASSERT_EQ(11,timer);
     server.startServe(timer,totalNormalWait,totalVipWait);
-    ASSERT_EQ(4,server.servedPeople[server.servedPeople.size()-1].id);
-    ASSERT_EQ(2,server.servedPeople[server.servedPeople.size()-1].calculatedWaitTime);
-    ASSERT_EQ(14,server.servedPeople[server.servedPeople.size()-1].calculatedLeaveTime);
-    ASSERT_EQ("vip",server.servedPeople[server.servedPeople.size()-1].calculatedType)
-                                <<"id = "  <<server.servedPeople[server.servedPeople.size()-1].id;
-    ASSERT_EQ(14,timer);
+
+    checkAfterServing(server,timer,14,4,2,14,"vip");
 
     server.enterPeopleToWait(timer,allPeople);
     ASSERT_EQ(14,timer);
     server.startServe(timer,totalNormalWait,totalVipWait);
-    ASSERT_EQ(3,server.servedPeople[server.servedPeople.size()-1].id);
-    ASSERT_EQ(6,server.servedPeople[server.servedPeople.size()-1].calculatedWaitTime);
-    ASSERT_EQ(17,server.servedPeople[server.servedPeople.size()-1].calculatedLeaveTime);
-    ASSERT_EQ("normal",server.servedPeople[server.servedPeople.size()-1].calculatedType)
-                                <<"id = "  <<server.servedPeople[server.servedPeople.size()-1].id;
-    ASSERT_EQ(17,timer);
+
+    checkAfterServing(server,timer,17,3,6,17,"normal");
 
     ASSERT_EQ(6,totalNormalWait);
     ASSERT_EQ(2,totalVipWait);
 
-
 }
+
 
