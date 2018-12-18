@@ -111,6 +111,41 @@ TEST(TestEnterPeopleToWait,enterCorrectly)
 
 }
 
+// TODO: Test func enterPeopleToWait in server.
+TEST(TestEnterPeopleToWait,enterCorrectly2)
+{
+    queue<Visitor> allPeople;      // This queue will contains all people.
+    // id arrivalTime serviceTime randomNo  // expectedWaitTime expectedLeaveTime expextedType
+    Visitor visitor(1, 3, 10, 0.1);              // 0 13 normal
+    allPeople.push(visitor);
+    Visitor visitor2(2, 9, 4, 0.7);             // 11 24 normal
+    allPeople.push(visitor2);
+    Visitor visitor3 = Visitor(3, 10, 3, 0.7);   // 3 16 vip
+    allPeople.push(visitor3);
+    Visitor visitor4 = Visitor(4, 11, 4, 0.7);   // 5 20 vip
+    allPeople.push(visitor4);
+
+    float timer=13;
+    allPeople.pop();  // After serving id=1.
+    Server server;
+    server.enterPeopleToWait(timer,allPeople);
+
+    // TODO: Replace 1 with 2 to try wrong expect.
+    EXPECT_EQ(2,server.vipPeople.size())<<"mismatch in expected vipSize at time "<<timer<<endl;
+    EXPECT_EQ(1,server.normalPeople.size())<<"mismatch in expected normalSize at time "<<timer<<endl;
+    EXPECT_EQ(0,allPeople.size())<<"mismatch in expected allPeopleSize at time "<<timer<<endl;
+    EXPECT_EQ(3,server.vipPeople.front().id)<<"id=3 not in the vip as expected at time "<<timer<<endl;
+    EXPECT_EQ(2,server.normalPeople.front().id)<<"id=2 not in the normal as expected at time "<<timer<<endl;
+
+    // allPeople now is empty.
+
+    server.vipPeople.pop();
+
+    EXPECT_EQ(4,server.vipPeople.front().id)<<"id=4 not in the vip as expected at time "<<timer<<endl;
+
+
+}
+
 
 // TODO: Test func startServe in server.
 TEST(TestStartServe,servedCorrectly)
@@ -159,5 +194,46 @@ TEST(TestStartServe,servedCorrectly)
     ASSERT_EQ(2,totalVipWait);
 
 }
+
+TEST(TestStartServe,servedCorrectly_2)
+{
+    queue<Visitor> allPeople;      // This queue will contains all people.
+    // id arrivalTime serviceTime randomNo  // expectedWaitTime expectedLeaveTime expextedType
+
+    Visitor visitor(1, 1, 3, 0.7);   // 0  4 normal
+    allPeople.push(visitor);
+    Visitor visitor2(2, 3, 1, 0.7);              // 1 5 normal
+    allPeople.push(visitor2);
+    Visitor visitor3 = Visitor(3,  4, 1, 0.1);             // 1 6 normal
+    allPeople.push(visitor3);
+    Visitor visitor4 = Visitor(4, 6, 2, 0.1);   // 0 8 normal
+    allPeople.push(visitor4);
+
+    Server server;
+    int totalNormalWait=0;
+    int totalVipWait=0;
+    float timer=allPeople.front().arrivalTime;
+    server.enterPeopleToWait(timer,allPeople);
+    server.startServe(timer,totalNormalWait,totalVipWait);
+
+    // Server server,float timer,float timerExpected,int id,int wait,int leave,string type
+
+    checkAfterServing(server,timer,4,1,0,4,"normal");
+
+
+    server.enterPeopleToWait(timer,allPeople);
+    server.startServe(timer,totalNormalWait,totalVipWait);
+    checkAfterServing(server,timer,5,2,1,5,"normal");
+    server.enterPeopleToWait(timer,allPeople);
+    server.startServe(timer,totalNormalWait,totalVipWait);
+    checkAfterServing(server,timer,6,3,1,6,"normal");
+    server.enterPeopleToWait(timer,allPeople);
+    server.startServe(timer,totalNormalWait,totalVipWait);
+    checkAfterServing(server,timer,8,4,0,8,"normal");
+    ASSERT_EQ(2,totalNormalWait);
+    ASSERT_EQ(0,totalVipWait);
+
+}
+
 
 
